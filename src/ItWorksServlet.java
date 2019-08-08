@@ -18,7 +18,7 @@ public class ItWorksServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().println("<h1>It works!</h1>");
+		response.getWriter().println("<h1>It works! again！</h1>");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
