@@ -53,7 +53,7 @@ public class Users extends HttpServlet {
 				boolean b = dbd.uinsert(db);
 				if (b) {
 					System.out.println("注册成功");
-					// 回传成功数据
+					// 回传成功数据 
 					// ...
 				} else {
 					System.out.println("注册失败");
