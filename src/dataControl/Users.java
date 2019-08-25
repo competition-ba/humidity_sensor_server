@@ -36,6 +36,19 @@ public class Users extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		System.out.print("1234");
 		try {
 			String json;
 			// json = request.getParameter("users");
@@ -76,7 +89,6 @@ public class Users extends HttpServlet {
 					return;
 				} else {
 					response.getWriter().print("fail");
-					System.out.print("shibai");
 					return;
 				}
 			}
@@ -84,17 +96,6 @@ public class Users extends HttpServlet {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
