@@ -45,7 +45,7 @@ public class DatabaseDao {
 			// 获得Statement对象
 			stmt = conn.createStatement();
 			// 发送SQL语句
-			String sql = "SELECT * FROM users WHERE user=" + user;
+			String sql = "SELECT * FROM users WHERE user='" + user+"'";
 			rs = stmt.executeQuery(sql);
 			// 处理结果集
 			while (rs.next()) {

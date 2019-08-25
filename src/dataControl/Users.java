@@ -39,7 +39,7 @@ public class Users extends HttpServlet {
 		try {
 			String json;
 			// json = request.getParameter("users");
-			json = "{\"user\":\"peter\",\"password\":\"666666\",\"state\":\"login\"}";
+			json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"login\"}";
 			JSONObject users = new JSONObject(json);
 			String user = users.getString("user");
 			String password = users.getString("password");
@@ -52,13 +52,11 @@ public class Users extends HttpServlet {
 				db.setPassword(password);
 				boolean b = dbd.uinsert(db);
 				if (b) {
-					System.out.println("注册成功");
-					// 回传成功数据 
-					// ...
+					response.getWriter().print("OK");
+					return;
 				} else {
-					System.out.println("注册失败");
-					// 回传失败数据
-					// ...
+					response.getWriter().print("fail");
+					return;
 				}
 
 			} else if (state.equals("login")) {
@@ -66,18 +64,20 @@ public class Users extends HttpServlet {
 				DatabaseDao dbd = new DatabaseDao();
 				// 数据库中的数据
 				Database db = dbd.ufind(user);
+				if(db==null) {
+					response.getWriter().print("fail");
+					return;
+				}
 				String user1 = db.getUser();
 				String password1 = db.getPassword();
 				// 与JSON传入的数据做比较
-				if (user1 == null) {
-					System.out.print("不存在这个账号");
-					// 回传失败数据
-				} else if (user1.equals(user) && password1.equals(password)) {
-					System.out.print("登录成功");
-					// 回传成功数据
+				if (user1.equals(user) && password1.equals(password)) {
+					response.getWriter().print("OK");
+					return;
 				} else {
-					System.out.print("密码错误");
-					// 回传失败数据
+					response.getWriter().print("fail");
+					System.out.print("shibai");
+					return;
 				}
 			}
 		} catch (JSONException e) {
