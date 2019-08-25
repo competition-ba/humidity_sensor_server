@@ -36,7 +36,6 @@ public class Users extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
 
 	}
 
@@ -77,7 +76,7 @@ public class Users extends HttpServlet {
 				DatabaseDao dbd = new DatabaseDao();
 				// 数据库中的数据
 				Database db = dbd.ufind(user);
-				if(db==null) {
+				if (db == null) {
 					response.getWriter().print("fail");
 					return;
 				}
