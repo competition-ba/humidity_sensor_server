@@ -50,8 +50,8 @@ public class Users extends HttpServlet {
 		System.out.print("1234");
 		try {
 			String json;
-			// json = request.getParameter("users");
-			json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"login\"}";
+			json = request.getParameter("users");
+			//json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"login\"}";
 			JSONObject users = new JSONObject(json);
 			String user = users.getString("user");
 			String password = users.getString("password");
