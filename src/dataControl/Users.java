@@ -39,7 +39,7 @@ public class Users extends HttpServlet {
 		try {
 			String json;
 			// json = request.getParameter("users");
-			json = "{\"user\":\"peter\",\"password\":\"666666\",\"state\":\"register\"}";
+			json = "{\"user\":\"peter\",\"password\":\"666666\",\"state\":\"login\"}";
 			JSONObject users = new JSONObject(json);
 			String user = users.getString("user");
 			String password = users.getString("password");
@@ -70,10 +70,13 @@ public class Users extends HttpServlet {
 				String password1 = db.getPassword();
 				// 与JSON传入的数据做比较
 				if (user1 == null) {
+					System.out.print("不存在这个账号");
 					// 回传失败数据
 				} else if (user1.equals(user) && password1.equals(password)) {
+					System.out.print("登录成功");
 					// 回传成功数据
 				} else {
+					System.out.print("密码错误");
 					// 回传失败数据
 				}
 			}
