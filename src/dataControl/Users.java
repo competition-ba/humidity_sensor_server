@@ -51,12 +51,31 @@ public class Users extends HttpServlet {
 				db.setUser(user);
 				db.setPassword(password);
 				boolean b = dbd.uinsert(db);
-				if (b)
+				if (b) {
 					System.out.println("注册成功");
-				else
+					// 回传成功数据
+					// ...
+				} else {
 					System.out.println("注册失败");
+					// 回传失败数据
+					// ...
+				}
+
 			} else if (state.equals("login")) {
 				// 查询是否存在该用户名or用户名与密码对应
+				DatabaseDao dbd = new DatabaseDao();
+				// 数据库中的数据
+				Database db = dbd.ufind(user);
+				String user1 = db.getUser();
+				String password1 = db.getPassword();
+				// 与JSON传入的数据做比较
+				if (user1 == null) {
+					// 回传失败数据
+				} else if (user1.equals(user) && password1.equals(password)) {
+					// 回传成功数据
+				} else {
+					// 回传失败数据
+				}
 			}
 		} catch (JSONException e) {
 			// TODO 自动生成的 catch 块
