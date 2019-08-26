@@ -10,7 +10,7 @@ public class Database {
 	private double x;
 	private double y;
 	private double data;
-	private String time;
+	private Date time;
 	public String getUser() {
 		return user;
 	}
@@ -53,10 +53,11 @@ public class Database {
 	public void setData(double data) {
 		this.data = data;
 	}
-	public String getTime() {
+	public Date getTime() {
 		return time;
 	}
-	public void setTime(String time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
+	
 }

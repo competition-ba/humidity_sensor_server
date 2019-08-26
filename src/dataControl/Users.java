@@ -36,7 +36,7 @@ public class Users extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		doGet(request, response);
+		
 	}
 
 	/**
@@ -46,10 +46,11 @@ public class Users extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//doGet(request, response);
 		try {
 			String json;
-			json = request.getParameter("users");
-			// json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"login\"}";
+			//json = request.getParameter("users");
+			json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"register\"}";
 			JSONObject users = new JSONObject(json);
 			String user = users.getString("user");
 			String password = users.getString("password");
