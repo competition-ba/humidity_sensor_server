@@ -88,7 +88,7 @@ public class DatabaseDao {
 		return false;
 	}
 
-	// 查找某条传感器号
+	// 通过user查找SenData的一条数据
 	public Database nfind(String user) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -99,13 +99,18 @@ public class DatabaseDao {
 			// 获得Statement对象
 			stmt = conn.createStatement();
 			// 发送SQL语句
-			String sql = "SELECT * FROM USN WHERE user=" + user;
+			String sql = "select * from SenData where senNo in (select senNo from USN where user='" + user + "');";
 			rs = stmt.executeQuery(sql);
 			// 处理结果集
 			while (rs.next()) {
 				Database db = new Database();
-				db.setUser(rs.getString("user"));
 				db.setSenNo(rs.getString("senNo"));
+				db.setNickname(rs.getString("nickname"));
+				db.setX(rs.getDouble("x"));
+				db.setY(rs.getDouble("y"));
+				db.setData(rs.getDouble("data"));
+				db.setTime(rs.getTimestamp("time"));
+				System.out.println("hello world"+rs.getTime("time"));
 				return db;
 			}
 			return null;
@@ -173,4 +178,5 @@ public class DatabaseDao {
 		}
 		return false;
 	}
+
 }

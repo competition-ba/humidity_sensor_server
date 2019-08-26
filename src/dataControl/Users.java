@@ -49,8 +49,8 @@ public class Users extends HttpServlet {
 		//doGet(request, response);
 		try {
 			String json;
-			//json = request.getParameter("users");
-			json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"register\"}";
+			json = request.getParameter("users");
+			//json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"register\"}";
 			JSONObject users = new JSONObject(json);
 			String user = users.getString("user");
 			String password = users.getString("password");

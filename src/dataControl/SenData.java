@@ -50,15 +50,12 @@ public class SenData extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		try {
-			
-			
 			//更新GUID数据
 			String json=new String();
 			Scanner sc = new Scanner(request.getReader());
 			while(sc.hasNext())
 				json +=(sc.next());
 			sc.close();
-			//json = request.getParameter("sendata");
 			//json ="{\"GUID\":\"2890014BC5CD42BA879B5F2C83E7A270\",\"DATA\":\"36.00\"}";
 			JSONObject sendata = new JSONObject(json);
 			String GUID =sendata.getString("GUID");
@@ -71,7 +68,7 @@ public class SenData extends HttpServlet {
 			db.setY(db.getY());
 			db.setData(DATA);
 			db.setTime(new Date());
-			boolean b=dbd.supdate(db);
+			dbd.supdate(db);
 		} catch (JSONException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
