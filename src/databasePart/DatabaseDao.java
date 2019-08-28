@@ -88,11 +88,12 @@ public class DatabaseDao {
 		return false;
 	}
 
-	// 通过user查找SenData的一条数据
-	public Database nfind(String user) {
+	// 通过user查找SenData的数据(多条)
+	public ArrayList<Database> nfind(String user) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		ArrayList<Database> list = new ArrayList<Database>();
 		try {
 			// 获得数据的连接
 			conn = DatabaseUtils.getConnection();
@@ -110,10 +111,10 @@ public class DatabaseDao {
 				db.setY(rs.getDouble("y"));
 				db.setData(rs.getDouble("data"));
 				db.setTime(rs.getTimestamp("time"));
-				System.out.println("hello world"+rs.getTime("time"));
-				return db;
+				//System.out.println("hello world"+rs.getString("nickname"));
+				list.add(db);
 			}
-			return null;
+			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
