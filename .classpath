@@ -7,7 +7,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/com.genuitec.embedded.tomcat.runtime.v85">
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
@@ -20,20 +20,5 @@
 			<attribute name="owner.project.facets" value="jst.web.jstl"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-pool.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-math3.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-io.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-fileupload.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-dbutils.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-dbcp.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-compress.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-collections.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-codec.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/tomcat/lib/commons-beanutils.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/桌面/竞赛项目/竞赛JSP部分/ServerPart/WebRoot/WEB-INF/lib/mysql-connector-java-8.0.17.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/桌面/竞赛项目/竞赛JSP部分/ServerPart/WebRoot/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/桌面/竞赛项目/竞赛JSP部分/ServerPart/WebRoot/WEB-INF/lib/json.jar"/>
-	<classpathentry kind="lib" path="/home/panjuhao/桌面/竞赛项目/竞赛JSP部分/ServerPart/WebRoot/WEB-INF/lib/ezmorph-1.0.6.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
