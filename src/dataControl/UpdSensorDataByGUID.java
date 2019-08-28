@@ -19,13 +19,13 @@ import databasePart.DatabaseDao;
  * Servlet implementation class SenData
  */
 @WebServlet("/SenData")
-public class SenData extends HttpServlet {
+public class UpdSensorDataByGUID extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SenData() {
+	public UpdSensorDataByGUID() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -68,7 +68,7 @@ public class SenData extends HttpServlet {
 			db.setY(db.getY());
 			db.setData(DATA);
 			db.setTime(new Date());
-			dbd.supdate(db);
+			dbd.updateSensorDataByGUID(db);
 		} catch (JSONException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();

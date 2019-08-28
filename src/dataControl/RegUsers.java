@@ -17,13 +17,13 @@ import databasePart.DatabaseDao;
  * Servlet implementation class Users
  */
 @WebServlet("/Users")
-public class Users extends HttpServlet {
+public class RegUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Users() {
+	public RegUsers() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,7 +36,7 @@ public class Users extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+
 	}
 
 	/**
@@ -46,11 +46,11 @@ public class Users extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		// doGet(request, response);
 		try {
 			String json;
 			json = request.getParameter("users");
-			//json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"register\"}";
+			// json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"register\"}";
 			JSONObject users = new JSONObject(json);
 			String user = users.getString("user");
 			String password = users.getString("password");
@@ -61,7 +61,7 @@ public class Users extends HttpServlet {
 				Database db = new Database();
 				db.setUser(user);
 				db.setPassword(password);
-				boolean b = dbd.uinsert(db);
+				boolean b = dbd.registerUsers(db);
 				if (b) {
 					response.getWriter().print("OK");
 					return;
@@ -74,7 +74,7 @@ public class Users extends HttpServlet {
 				// 查询是否存在该用户名or用户名与密码对应
 				DatabaseDao dbd = new DatabaseDao();
 				// 数据库中的数据
-				Database db = dbd.ufind(user);
+				Database db = dbd.queryUserAndPassword(user);
 				if (db == null) {
 					response.getWriter().print("fail");
 					return;

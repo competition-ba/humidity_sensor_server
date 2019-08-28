@@ -21,13 +21,13 @@ import databasePart.DatabaseDao;
  * Servlet implementation class USN
  */
 @WebServlet("/USN")
-public class USN extends HttpServlet {
+public class QrySensorDataByUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public USN() {
+	public QrySensorDataByUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -60,7 +60,7 @@ public class USN extends HttpServlet {
 			JSONObject usn = new JSONObject(json);
 			String user = usn.getString("user");
 			DatabaseDao dbd = new DatabaseDao();
-			ArrayList<Database> list = dbd.nfind(user);
+			ArrayList<Database> list = dbd.querySensorDataByUser(user);
 			//将list信息提取并给予list2中
 			ArrayList<JSONObject> list2 = new ArrayList<JSONObject>();
 			for (int i = 0; i < list.size(); i++) {
