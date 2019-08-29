@@ -87,7 +87,7 @@ public class DatabaseDao {
 		return false;
 	}
 
-	//在USN表通过user查询senData数据
+	// 在USN表通过user查询senData数据
 	public ArrayList<Database> querySenDataByUser(String user) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -116,7 +116,7 @@ public class DatabaseDao {
 		}
 		return null;
 	}
-	
+
 	// 通过user查找SenData的数据(多条)
 	public ArrayList<Database> querySensorDataByUser(String user) {
 		Connection conn = null;
@@ -152,21 +152,33 @@ public class DatabaseDao {
 		return null;
 	}
 
-	// 插入一条数据
-	/*
-	 * public boolean sinsert(Database db) { Connection conn = null; Statement stmt
-	 * = null; ResultSet rs = null; try { // 获得数据的连接 conn =
-	 * DatabaseUtils.getConnection(); // 获得Statement对象 stmt =
-	 * conn.createStatement(); SimpleDateFormat sdf = new
-	 * SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); String time =
-	 * sdf.format(db.getTime()); // 发送SQL语句 String sql =
-	 * "INSERT INTO SenData(senNo,nickname,x,y,data,time) VALUES('" + db.getSenNo()
-	 * + "','" + db.getNickname() + "'," + db.getX() + "," + db.getY() + "," +
-	 * db.getData() + ",'" + time + "');"; int num = stmt.executeUpdate(sql); if
-	 * (num > 0) { return true; } return false; } catch (Exception e) {
-	 * e.printStackTrace(); } finally { DatabaseUtils.release(rs, stmt, conn); }
-	 * return false; }
-	 */
+	// 插入一条传感器信息
+	public boolean addSensorInf(Database db) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			// 获得数据的连接
+			conn = DatabaseUtils.getConnection();
+			// 获得Statement对象
+			stmt = conn.createStatement();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			String time = sdf.format(db.getTime());
+			// 发送SQL语句
+			String sql = "INSERT INTO SenData(senNo,nickname,x,y,data,time) VALUES('" + db.getSenNo() + "','"
+					+ db.getNickname() + "'," + db.getX() + "," + db.getY() + "," + db.getData() + ",'" + time + "');";
+			int num = stmt.executeUpdate(sql);
+			if (num > 0) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseUtils.release(rs, stmt, conn);
+		}
+		return false;
+	}
 
 	// 更新一条数据
 	public boolean updateSensorDataByGUID(Database db) {

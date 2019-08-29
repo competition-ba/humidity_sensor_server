@@ -2,6 +2,7 @@ package dataControl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,8 +36,8 @@ public class RegSensor extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -48,23 +49,33 @@ public class RegSensor extends HttpServlet {
 		try {
 			String json;
 			boolean j=true;
-			json = request.getParameter("usersAndGUID");
-			//json = "{\"user\":\"lily\",\"senNo\":\"00000000000000000000000000000000\"}";
+			//json = request.getParameter("usersAndGUID");
+			
+			json = "{\"user\":\"lily\",\"senNo\":\"00000000000000000000000000000002\",\"nickname\":\"\"}";
 			JSONObject uAndS = new JSONObject(json);
 			String user = uAndS.getString("user");
 			String GUID = uAndS.getString("senNo");
+			String nickname = uAndS.getString("nickname");
+			//System.out.println(nickname);
 			DatabaseDao dbd = new DatabaseDao();
 			Database db = new Database();
 			ArrayList<Database> list = dbd.querySenDataByUser(user);
 			for(int i=0;i<list.size();i++) {
 				String senNo = list.get(i).getSenNo();
-				System.out.println("list.get("+i+").getSenNo()"+list.get(i).getSenNo());
+				//System.out.println("list.get("+i+").getSenNo()"+list.get(i).getSenNo());
 				if(GUID.equals(senNo)) j=false;;
 			}
 			if(j) {
 				db.setUser(user);
 				db.setSenNo(GUID);
+				db.setNickname(nickname);
+				db.setX(0);
+				db.setY(0);
+				db.setData(0);
+				db.setTime(new Date());
+				boolean a=dbd.addSensorInf(db);
 				boolean b=dbd.registerSensor(db);
+				System.out.println();
 				if (b) {
 					//System.out.println("OK");
 					response.getWriter().print("OK");
@@ -76,7 +87,7 @@ public class RegSensor extends HttpServlet {
 				}
 			}else {
 				//System.out.println("fail-存在相同GUID");
-				response.getWriter().print("fail");
+				response.getWriter().print("exists");
 				return;
 			}
 			
