@@ -19,13 +19,13 @@ import databasePart.DatabaseDao;
  * Servlet implementation class SenData
  */
 @WebServlet("/SenData")
-public class UpdSensorDataByGUID extends HttpServlet {
+public class UpdSensorData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UpdSensorDataByGUID() {
+	public UpdSensorData() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -63,12 +63,9 @@ public class UpdSensorDataByGUID extends HttpServlet {
 			DatabaseDao dbd = new DatabaseDao();
 			Database db = new Database();
 			db.setSenNo(GUID);
-			db.setNickname(db.getNickname());
-			db.setX(db.getX());
-			db.setY(db.getY());
 			db.setData(DATA);
 			db.setTime(new Date());
-			dbd.updateSensorDataByGUID(db);
+			dbd.updateSensorData(db);
 		} catch (JSONException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
