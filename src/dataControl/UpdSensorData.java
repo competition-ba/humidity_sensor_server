@@ -38,7 +38,7 @@ public class UpdSensorData extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+
 	}
 
 	/**
@@ -48,17 +48,17 @@ public class UpdSensorData extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		// doGet(request, response);
 		try {
-			//更新GUID数据
-			String json=new String();
+			// 更新GUID数据
+			String json = new String();
 			Scanner sc = new Scanner(request.getReader());
-			while(sc.hasNext())
-				json +=(sc.next());
+			while (sc.hasNext())
+				json += (sc.next());
 			sc.close();
-			//json ="{\"GUID\":\"2890014BC5CD42BA879B5F2C83E7A270\",\"DATA\":\"36.00\"}";
+			// json ="{\"GUID\":\"2890014BC5CD42BA879B5F2C83E7A270\",\"DATA\":\"36.00\"}";
 			JSONObject sendata = new JSONObject(json);
-			String GUID =sendata.getString("GUID");
+			String GUID = sendata.getString("GUID");
 			double DATA = sendata.getDouble("DATA");
 			DatabaseDao dbd = new DatabaseDao();
 			Database db = new Database();

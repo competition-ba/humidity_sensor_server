@@ -14,16 +14,16 @@ import databasePart.Database;
 import databasePart.DatabaseDao;
 
 /**
- * Servlet implementation class Users
+ * Servlet implementation class UpdPassword
  */
-@WebServlet("/Users")
-public class RegUsers extends HttpServlet {
+@WebServlet("/UpdPassword")
+public class UpdPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public RegUsers() {
+	public UpdPassword() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -46,52 +46,35 @@ public class RegUsers extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// doGet(request, response);
+		doGet(request, response);
 		try {
 			String json;
-			json = request.getParameter("users");
-			// json = "{\"user\":\"peter\",\"password\":\"123\",\"state\":\"register\"}";
+			json = request.getParameter("pas");
+			// json =
+			// "{\"user\":\"fhh\",\"password1\":\"123456\",\"password2\":\"000000\"}";
 			JSONObject users = new JSONObject(json);
 			String user = users.getString("user");
-			String password = users.getString("password");
-			String state = users.getString("state");
-			if (state.equals("register")) {
-				// 插入用户数据至Users表
-				DatabaseDao dbd = new DatabaseDao();
-				Database db = new Database();
+			String password1 = users.getString("password1");
+			String password2 = users.getString("password2");
+			DatabaseDao dbd = new DatabaseDao();
+			Database db = new Database();
+			db = dbd.queryUserAndPassword(user);
+			if (password1.equals(db.getPassword())) {
+				db.setPassword(password2);
 				db.setUser(user);
-				db.setPassword(password);
-				boolean b = dbd.registerUsers(db);
-				if (b) {
+				boolean a = dbd.updatePassword(db);
+				if (a) {
 					response.getWriter().print("OK");
 					return;
 				} else {
 					response.getWriter().print("fail");
 					return;
 				}
-
-			} else if (state.equals("login")) {
-				// 查询是否存在该用户名or用户名与密码对应
-				DatabaseDao dbd = new DatabaseDao();
-				// 数据库中的数据
-				Database db = dbd.queryUserAndPassword(user);
-				if (db == null) {
-					response.getWriter().print("fail");
-					return;
-				}
-				String user1 = db.getUser();
-				String password1 = db.getPassword();
-				// 与JSON传入的数据做比较
-				if (user1.equals(user) && password1.equals(password)) {
-					response.getWriter().print("OK");
-					return;
-				} else {
-					response.getWriter().print("fail");
-					return;
-				}
+			} else {
+				response.getWriter().print("exist");
+				return;
 			}
 		} catch (JSONException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 	}

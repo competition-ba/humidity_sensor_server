@@ -22,49 +22,56 @@ import databasePart.DatabaseDao;
 @WebServlet("/RegSensor")
 public class RegSensor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegSensor() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public RegSensor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		// doGet(request, response);
 		try {
 			String json;
-			boolean j=true;
+			boolean j = true;
 			json = request.getParameter("usersAndGUID");
-			//json = "{\"user\":\"lily\",\"senNo\":\"00000000000000000000000000000002\",\"nickname\":\"\"}";
+			// json =
+			// "{\"user\":\"lily\",\"senNo\":\"00000000000000000000000000000002\",\"nickname\":\"\"}";
 			JSONObject uAndS = new JSONObject(json);
 			String user = uAndS.getString("user");
 			String GUID = uAndS.getString("senNo");
 			String nickname = uAndS.getString("nickname");
-			//System.out.println(nickname);
+			// System.out.println(nickname);
 			DatabaseDao dbd = new DatabaseDao();
 			Database db = new Database();
 			ArrayList<Database> list = dbd.querySenDataByUser(user);
-			for(int i=0;i<list.size();i++) {
+			for (int i = 0; i < list.size(); i++) {
 				String senNo = list.get(i).getSenNo();
-				//System.out.println("list.get("+i+").getSenNo()"+list.get(i).getSenNo());
-				if(GUID.equals(senNo)) j=false;;
+				// System.out.println("list.get("+i+").getSenNo()"+list.get(i).getSenNo());
+				if (GUID.equals(senNo))
+					j = false;
+				;
 			}
-			if(j) {
+			if (j) {
 				db.setUser(user);
 				db.setSenNo(GUID);
 				db.setNickname(nickname);
@@ -72,25 +79,24 @@ public class RegSensor extends HttpServlet {
 				db.setY(0);
 				db.setData(0);
 				db.setTime(new Date());
-				boolean a=dbd.addSensorInf(db);
-				boolean b=dbd.registerSensor(db);
-				//System.out.println();
+				boolean a = dbd.addSensorInf(db);
+				boolean b = dbd.registerSensor(db);
+				// System.out.println();
 				if (b) {
-					//System.out.println("OK");
+					// System.out.println("OK");
 					response.getWriter().print("OK");
 					return;
 				} else {
-					//System.out.println("fail");
+					// System.out.println("fail");
 					response.getWriter().print("fail");
 					return;
 				}
-			}else {
-				//System.out.println("fail-存在相同GUID");
+			} else {
+				// System.out.println("fail-存在相同GUID");
 				response.getWriter().print("exists");
 				return;
 			}
-			
-			
+
 		} catch (JSONException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();

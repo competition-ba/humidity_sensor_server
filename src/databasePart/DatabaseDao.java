@@ -62,6 +62,31 @@ public class DatabaseDao {
 		return null;
 	}
 
+	// 修改用户名密码
+	public boolean updatePassword(Database db) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			// 获得数据的连接
+			conn = DatabaseUtils.getConnection();
+			// 获得Statement对象
+			stmt = conn.createStatement();
+			// 发送SQL语句
+			String sql = "update users set password='" + db.getPassword() + "' where user='" + db.getUser() + "';";
+			int num = stmt.executeUpdate(sql);
+			if (num > 0) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseUtils.release(rs, stmt, conn);
+		}
+		return false;
+	}
+
 	// 注册传感器
 	public boolean registerSensor(Database db) {
 		Connection conn = null;
@@ -193,7 +218,8 @@ public class DatabaseDao {
 			// 发送SQL语句
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			String time = sdf.format(db.getTime());
-			String sql = "update SenData set data=" + db.getData() + ",time='" + time + "' where senNo='" + db.getSenNo() + "';";
+			String sql = "update SenData set data=" + db.getData() + ",time='" + time + "' where senNo='"
+					+ db.getSenNo() + "';";
 			int num = stmt.executeUpdate(sql);
 			if (num > 0) {
 				return true;
@@ -207,7 +233,7 @@ public class DatabaseDao {
 		return false;
 	}
 
-	//修改传感器数据的xy位置
+	// 修改传感器数据的xy位置
 	public boolean updateSensorCoords(Database db) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -220,7 +246,8 @@ public class DatabaseDao {
 			// 发送SQL语句
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			String time = sdf.format(db.getTime());
-			String sql = "update SenData set x=" + db.getX() + ",y=" + db.getY()+ ",time='" + time + "' where senNo='" + db.getSenNo() + "';";
+			String sql = "update SenData set x=" + db.getX() + ",y=" + db.getY() + ",time='" + time + "' where senNo='"
+					+ db.getSenNo() + "';";
 			int num = stmt.executeUpdate(sql);
 			if (num > 0) {
 				return true;
@@ -233,4 +260,5 @@ public class DatabaseDao {
 		}
 		return false;
 	}
+
 }
