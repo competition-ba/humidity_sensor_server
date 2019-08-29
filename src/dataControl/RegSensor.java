@@ -49,9 +49,8 @@ public class RegSensor extends HttpServlet {
 		try {
 			String json;
 			boolean j=true;
-			//json = request.getParameter("usersAndGUID");
-			
-			json = "{\"user\":\"lily\",\"senNo\":\"00000000000000000000000000000002\",\"nickname\":\"\"}";
+			json = request.getParameter("usersAndGUID");
+			//json = "{\"user\":\"lily\",\"senNo\":\"00000000000000000000000000000002\",\"nickname\":\"\"}";
 			JSONObject uAndS = new JSONObject(json);
 			String user = uAndS.getString("user");
 			String GUID = uAndS.getString("senNo");
@@ -75,7 +74,7 @@ public class RegSensor extends HttpServlet {
 				db.setTime(new Date());
 				boolean a=dbd.addSensorInf(db);
 				boolean b=dbd.registerSensor(db);
-				System.out.println();
+				//System.out.println();
 				if (b) {
 					//System.out.println("OK");
 					response.getWriter().print("OK");
