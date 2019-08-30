@@ -54,8 +54,7 @@ public class RegSensor extends HttpServlet {
 			String json;
 			boolean j = true;
 			json = request.getParameter("usersAndGUID");
-			// json =
-			// "{\"user\":\"lily\",\"senNo\":\"00000000000000000000000000000002\",\"nickname\":\"\"}";
+			// json = "{\"user\":\"lily\",\"senNo\":\"00000000000000000000000000000002\",\"nickname\":\"\"}";
 			JSONObject uAndS = new JSONObject(json);
 			String user = uAndS.getString("user");
 			String GUID = uAndS.getString("senNo");

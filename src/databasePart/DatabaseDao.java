@@ -261,4 +261,31 @@ public class DatabaseDao {
 		return false;
 	}
 
+	// 删除传感器用户以及信息
+	public boolean deleteSensor(String GUID) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			// 获得数据的连接
+			conn = DatabaseUtils.getConnection();
+			// 获得Statement对象
+			stmt = conn.createStatement();
+			// 发送SQL语句
+			//String sql = "delete from USN where SenNo='" + GUID + "';";
+			String sql2 = "delete from SenData where SenNo='" + GUID + "';";
+			//int num = stmt.executeUpdate(sql);
+			int num2 = stmt.executeUpdate(sql2);
+			if (num2 > 0 ) {//&& num2 > 0
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseUtils.release(rs, stmt, conn);
+		}
+		return false;
+	}
+
 }

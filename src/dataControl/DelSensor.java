@@ -1,9 +1,6 @@
 package dataControl;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.Scanner;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,16 +14,16 @@ import databasePart.Database;
 import databasePart.DatabaseDao;
 
 /**
- * Servlet implementation class UpdSensorCoords
+ * Servlet implementation class DelSensor
  */
-@WebServlet("/UpdSensorCoords")
-public class UpdSensorCoords extends HttpServlet {
+@WebServlet("/DelSensor")
+public class DelSensor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UpdSensorCoords() {
+	public DelSensor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -39,7 +36,7 @@ public class UpdSensorCoords extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		
 	}
 
 	/**
@@ -51,23 +48,25 @@ public class UpdSensorCoords extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		try {
-			// 修改数据位置
 			String json;
-			json = request.getParameter("xy");
-			json ="{\"GUID\":\"00000000000000000000000000000002\",\"x\":\"22\",\"y\":\"22\"}";
-			JSONObject sendata = new JSONObject(json);
-			String GUID = sendata.getString("GUID");
-			double x = sendata.getDouble("x");
-			double y = sendata.getDouble("y");
+			// json = request.getParameter("del");
+			json = "{\"GUID\":\"123456789\"}";
+			JSONObject delete = new JSONObject(json);
+			String GUID = delete.getString("GUID");
 			DatabaseDao dbd = new DatabaseDao();
-			Database db = new Database();
-			db.setSenNo(GUID);
-			db.setX(x);
-			db.setY(y);
-			db.setTime(new Date());
-			dbd.updateSensorCoords(db);
+			// 删除USN表中数据
+			boolean a = dbd.deleteSensor(GUID);
+			System.out.println(a);
+			if (a) {
+				response.getWriter().print("OK");
+				return;
+			} else {
+				response.getWriter().print("fail");
+				return;
+			}
+
+
 		} catch (JSONException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 	}
