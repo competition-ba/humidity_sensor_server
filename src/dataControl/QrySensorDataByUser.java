@@ -40,7 +40,7 @@ public class QrySensorDataByUser extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		//doGet(request, response);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class QrySensorDataByUser extends HttpServlet {
 			// 根据用户名查询传感器信息
 			String json = new String();
 			json = request.getParameter("USN");
-			// json = "{\"user\":\"john\"}";
+			json = "{\"user\":\"john\"}";
 			JSONObject usn = new JSONObject(json);
 			String user = usn.getString("user");
 			DatabaseDao dbd = new DatabaseDao();
@@ -71,6 +71,7 @@ public class QrySensorDataByUser extends HttpServlet {
 				double data = list.get(i).getData();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 				String time = sdf.format(list.get(i).getTime());
+				String NH3=list.get(i).getNH3();
 				// 将数据存储并转成JSON数组形式
 				JSONObject json2 = new JSONObject();
 				json2.put("senNo", senNo);
@@ -79,10 +80,11 @@ public class QrySensorDataByUser extends HttpServlet {
 				json2.put("y", y);
 				json2.put("data", data);
 				json2.put("time", time);
+				json2.put("NH3", NH3);
 				list2.add(json2);
 			}
 			JSONArray jsonarray1 = new JSONArray(list2);
-			// System.out.println(jsonarray1.toString());
+			System.out.println(jsonarray1.toString());
 			response.getWriter().print(jsonarray1.toString());
 			return;
 

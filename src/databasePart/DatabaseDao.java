@@ -165,6 +165,7 @@ public class DatabaseDao {
 				db.setY(rs.getDouble("y"));
 				db.setData(rs.getDouble("data"));
 				db.setTime(rs.getTimestamp("time"));
+				db.setNH3(rs.getString("NH3"));
 				// System.out.println("hello world"+rs.getString("nickname"));
 				list.add(db);
 			}
@@ -191,7 +192,7 @@ public class DatabaseDao {
 			String time = sdf.format(db.getTime());
 			// 发送SQL语句
 			String sql = "INSERT INTO SenData(senNo,nickname,x,y,data,time) VALUES('" + db.getSenNo() + "','"
-					+ db.getNickname() + "'," + db.getX() + "," + db.getY() + "," + db.getData() + ",'" + time + "');";
+					+ db.getNickname() + "'," + db.getX() + "," + db.getY() + "," + db.getData() + ",'" + time + "','"+db.getNH3()+"');";
 			int num = stmt.executeUpdate(sql);
 			if (num > 0) {
 				return true;

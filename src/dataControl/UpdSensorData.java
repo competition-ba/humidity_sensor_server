@@ -56,15 +56,17 @@ public class UpdSensorData extends HttpServlet {
 			while (sc.hasNext())
 				json += (sc.next());
 			sc.close();
-			// json ="{\"GUID\":\"2890014BC5CD42BA879B5F2C83E7A270\",\"DATA\":\"36.00\"}";
+			// json ="{\"GUID\":\"2890014BC5CD42BA879B5F2C83E7A270\",\"DATA\":\"36.00\"}";已过时
 			JSONObject sendata = new JSONObject(json);
 			String GUID = sendata.getString("GUID");
+			String NH3=sendata.getString("NH3");
 			double DATA = sendata.getDouble("DATA");
 			DatabaseDao dbd = new DatabaseDao();
 			Database db = new Database();
 			db.setSenNo(GUID);
 			db.setData(DATA);
 			db.setTime(new Date());
+			db.setNH3(NH3);
 			dbd.updateSensorData(db);
 		} catch (JSONException e) {
 			// TODO 自动生成的 catch 块

@@ -7,10 +7,19 @@ public class Database {
 	private String password;
 	private String senNo;
 	private String nickname;
+	private String NH3;
 	private double x;
 	private double y;
 	private double data;
 	private Date time;
+
+	public String getNH3() {
+		return NH3;
+	}
+
+	public void setNH3(String nH3) {
+		NH3 = nH3;
+	}
 
 	public String getUser() {
 		return user;

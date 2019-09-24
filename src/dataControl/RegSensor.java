@@ -78,6 +78,7 @@ public class RegSensor extends HttpServlet {
 				db.setY(0);
 				db.setData(0);
 				db.setTime(new Date());
+				db.setNH3("0");
 				boolean a = dbd.addSensorInf(db);
 				boolean b = dbd.registerSensor(db);
 				// System.out.println();
