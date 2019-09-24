@@ -220,7 +220,7 @@ public class DatabaseDao {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			String time = sdf.format(db.getTime());
 			String sql = "update SenData set data=" + db.getData() + ",time='" + time + "' where senNo='"
-					+ db.getSenNo() + "';";
+					+ db.getSenNo() + "','"+db.getNH3()+"';";
 			int num = stmt.executeUpdate(sql);
 			if (num > 0) {
 				return true;
