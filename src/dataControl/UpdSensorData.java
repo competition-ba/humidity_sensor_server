@@ -66,7 +66,6 @@ public class UpdSensorData extends HttpServlet {
 			db.setSenNo(GUID);
 			db.setData(DATA); 
 			db.setTime(new Date());
-		
 			db.setNH3(NH3);
 			System.out.println(NH3);
 			dbd.updateSensorData(db);
